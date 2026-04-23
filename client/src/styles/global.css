@@ -1,0 +1,6 @@
+body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin: 0; padding: 1rem; }
+nav a { margin-right: 0.5rem; }
+.page { max-width: 960px; margin: 0 auto; }
+.player-grid { display: grid; grid-template-columns: 1fr 1fr 300px; gap: 1rem; align-items: start; }
+.vibe-meter { margin-top: 1rem; padding: 0.5rem; border: 1px solid #ddd; }
+.mic-status { margin-top: 0.5rem; }
