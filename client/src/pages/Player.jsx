@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import YouTubePlayer from '../components/YouTubePlayer';
 import MicInput from '../components/MicInput';
 import VibeMeter from '../components/VibeMeter';
+import DebugPanel from '../components/DebugPanel';
 import { createAudioProcessor } from '../services/audioService';
 import { classifyVibe } from '../services/vibeService';
 import { getRecommendations } from '../services/recommendationService';
 
 export default function Player() {
   const [vibe, setVibe] = useState(null);
+  const [features, setFeatures] = useState({});
   const [recs, setRecs] = useState([]);
 
   useEffect(() => {
@@ -15,8 +17,9 @@ export default function Player() {
     setRecs(getRecommendations(vibe));
   }, [vibe]);
 
-  const handleAudioData = async (features) => {
-    const classified = await classifyVibe(features);
+  const handleAudioData = async (newFeatures) => {
+    setFeatures(newFeatures || {});
+    const classified = await classifyVibe(newFeatures);
     setVibe(classified);
   };
 
@@ -30,6 +33,7 @@ export default function Player() {
         <section>
           <MicInput onFeatures={handleAudioData} createProcessor={createAudioProcessor} />
           <VibeMeter vibe={vibe} />
+          <DebugPanel features={features} vibe={vibe} />
         </section>
         <aside>
           <h3>Recommendations</h3>
